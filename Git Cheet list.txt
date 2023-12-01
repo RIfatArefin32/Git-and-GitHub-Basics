@@ -1,0 +1,156 @@
+gi1. Git Setup and Configuration:
+** To configuration the user name and password globally
+	git config --global user.name "Rifat Arefin"
+	git config --global user.email "arefinrifat786@gmail.com"
+	git config --list   // to see the configuration
+** we can see our configuration individually:
+	git config user.name  //output: Rifat Arefin 
+	git config user.email // output: arefinrifat786@gmail.com
+** we can change the user name or email:
+	git config --global user.name "updated user name"
+	git config --global user.email "updated email"
+--------------------------------------------------------------------------------------
+	CLTR + L : clear screen or write: clear
+--------------------------------------------------------------------------------------
+2. Create git folder:
+First we've to go to the directory where we want to create new directory.
+** To know the present working directory
+	pwd	//present working directory
+** to go the previous directory we can use:
+	cd .. 	//cd: change directory
+** To see all the files of the current directory:
+	ls 	//list of all files
+** To go a local disk:
+	cd f:	//change directory to local disk f
+*** Create directories:
+	mkdir newFolder 	// make new directory
+	rmdir folder_name 	// remove empty directory
+	rm -rf folder_name	// remove any directory or file
+	cd newFolder 		// change to new directory
+	ls-a 			// show all including hidden folders
+	git init 		// git initialization
+	touch file1.txt 	// create new file in the newFolder
+	start file1.txt 	// Open the file1.txt file
+	git status 		// Display the state of the working directory
+
+Note: if the folder name contains space we use: 'Folder 1/file.txt'
+--------------------------------------------------------------------------------------
+Local Repository Concept:
+	
+		Untracked	Unmodified	Modified	Stagged	
+		  |	       (local repo)         |              |
+		  |		     |              |              |
+Create a file----->
+		Add the file--------------------------------------->
+				    <----------------------commit the file
+		     <----------remove the file
+				edit the file------>
+						stagge the file---->
+				    <----------------------commit the file
+
+--------------------------------------------------------------------------------------
+3. Add files in the stagging area/ Track files:
+	git add <f_name>: Stagging the specified file
+	git add -A 	: stagging all the changed file in directory and subdirectories
+	git add . 	: stagging all changed file in directory but not subdirectories
+	git add *.txt 	: stagging all .txt file in the directory
+
+* Checking difference if any file is modified:
+	git diff 
+** Untracked the tracked file/ Remove from stagging area 
+	git rm --cached Folder/file.txt 
+** If we want to see the difference between staged and commited file
+	git diff --staged
+** If we want hard reset from stagging area:
+	git reset --hard	
+** If we want to forcefully delete the file from this stage:
+	git rm file.txt -f	
+
+ 
+Note: if the folder name contains space we use: 'Folder 1/file.txt'	 
+--------------------------------------------------------------------------------------
+4. Git Commit/ Add to local repository
+	git commit -m "massage here" //stagging area to local repository	
+	git add <file_name> && git commit -m "massage here" //stagging and commiting at the same time
+	git add . && git commit -m "commit massage"
+
+	git log 		//see the commit history
+	git log --oneline	//see commit history in one line
+	
+	git show <commit_id> 	// details of commit_id 
+	git show HEAD 		// details of HEAD commit
+	git show HEAD~1 	// 1 means 1st commit after HEAD commit
+	git show HEAD~2 	// 2 means 2nd commit after HEAD commit
+--------------------------------------------------------------------------------------
+5. Git Uncommit/ UNDO
+ 	git reset HEAD^		 // Uncommit from local repo and remove from the stagge area
+	git reset --soft HEAD^   // only uncommit from local repository
+	git reset --hard HEAD^	 // Uncommit and remove from working directory
+
+	git checkout commitID/ HEAD~Number
+	git checkout master
+
+** git revert: Its like undo command
+	git revert <Commit_id>
+--------------------------------------------------------------------------------------
+** git clean: Clean working directory; remove any untracked file from working
+	      directory. If we clean any file; its permanent and cannot be
+	      recovered.	
+	git clean -n: 
+	git clean -f:
+	git clean -i:
+--------------------------------------------------------------------------------------
+6. .gitignore : কিছু জিনিস কে গিট থেকে ignore করতে use করা হয়।
+	For example:
+	text.txt    : git ignores "text.txt" file
+	.env	    : git ignores .env files --> env te normally hidden file rakha hoy
+	
+	*.txt	    : All txt files are ignored
+	!main.txt   : git doesnot ignore main.txt if "*.txt is ignored"
+	
+	text?.txt   : git ignors files like text1.txt/ text2.txt
+	temp/	    : git ignores all files of folder temp 
+	temp/fil.txt: git ignores fil.txt file of temp folder
+--------------------------------------------------------------------------------------
+7. Graphical GitHub:
+	> sign in to github
+	> create new repository
+	> add a README file
+	> create new file in the repository
+	> edit new file
+	> commit new filegi
+	> Edit README.md file 
+--------------------------------------------------------------------------------------
+8. How to connect local repository to remote repository:
+	git branch -M main	// rename master as main
+	git remote add remote_name(e.g. origin) <remote_url>
+	git remote -v 		//shows the remote along with the url
+	git pull origin main	//pull everything of the remote repository
+--------------------------------------------------------------------------------------
+9. Push an existing repository from the command line
+	git branch -M main	      // rename master as main
+	git push -u origin main	      // push local repo to remote repo
+	git pull 		      	// pull from repository 
+--------------------------------------------------------------------------------------
+10. How to clone remote repo to local repo
+	git clone <repository_link>   // Clone a repository
+--------------------------------------------------------------------------------------
+11. Branch and Merging
+	* git branch //local e ki ki branch ase eta dekhabe
+
+	* git branch <branch_name> //create a new branch
+	  git checkout <branch_name> //switch to new branch
+	  git branch -d <branch_name> //delete the branch
+
+**note: to delete a branch you have to ensure that the deleted branch is not the current 
+branch. So we've to swith another branch to delete the current branch.
+for example:	
+	git checkout main
+	git branch -d feature
+
+** Now you want to merge your branch to main/master branch
+	git checkout master/ main
+	git merge feature -m "add feature branch"
+--------------------------------------------------------------------------------------
+Fork -> git clone -> contribute -> make pull request
+-----------------------------------------------------------------------
